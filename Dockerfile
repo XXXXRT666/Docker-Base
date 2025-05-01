@@ -36,6 +36,8 @@ ENV TARGETPLATFORM=${TARGETPLATFORM}
 
 ENV HOME="/root"
 
+WORKDIR /workspace
+
 COPY anaconda_install.sh /workspace
 
 RUN bash anaconda_install.sh && rm -rf /workspace/anaconda_install.sh
