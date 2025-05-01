@@ -89,8 +89,6 @@ jobs:
             WORKFLOW=true
           tags: |
             xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base-amd64
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
   build-arm64:
     runs-on: ubuntu-22.04-arm
@@ -177,8 +175,6 @@ jobs:
             WORKFLOW=true
           tags: |
             xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base-arm64
-          cache-from: type=gha
-          cache-to: type=gha,mode=min
 
   merge-and-clean:
     needs:
