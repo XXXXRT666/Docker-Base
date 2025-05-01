@@ -1,0 +1,102 @@
+name: Build and Publish Docker Base Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-meta:
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.meta.outputs.tag }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+  build-and-push:
+    needs: generate-meta
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - cuda_version: 12.4
+            lite: true
+            cuda_base: runtime
+            tag_prefix: cu124-runtime
+          - cuda_version: 12.4
+            lite: false
+            cuda_base: devel
+            tag_prefix: cu124-devel
+          - cuda_version: 12.8
+            lite: true
+            cuda_base: runtime
+            tag_prefix: cu128-runtime
+          - cuda_version: 12.8
+            lite: false
+            cuda_base: devel
+            tag_prefix: cu128-devel
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Free up disk space
+        run: |
+          echo "Before cleanup:"
+          df -h  
+
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo rm -rf /opt/hostedtoolcache/PyPy
+          sudo rm -rf /opt/hostedtoolcache/go
+          sudo rm -rf /opt/hostedtoolcache/node
+          sudo rm -rf /opt/hostedtoolcache/Ruby
+          sudo rm -rf /opt/microsoft
+          sudo rm -rf /opt/pipx
+          sudo rm -rf /opt/az
+          sudo rm -rf /opt/google
+
+          
+          sudo rm -rf /usr/lib/jvm
+          sudo rm -rf /usr/lib/google-cloud-sdk
+          sudo rm -rf /usr/lib/dotnet
+
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/local/.ghcup
+          sudo rm -rf /usr/local/julia1.11.5
+          sudo rm -rf /usr/local/share/powershell
+          sudo rm -rf /usr/local/share/chromium
+
+          sudo rm -rf /usr/share/swift
+          sudo rm -rf /usr/share/miniconda
+          sudo rm -rf /usr/share/az_12.1.0
+          sudo rm -rf /usr/share/dotnet
+          
+
+          echo "After cleanup:"
+          df -h
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          build-args: |
+            LITE=${{ matrix.lite }}
+            CUDA_BASE=${{ matrix.cuda_base }}
+            CUDA_VERSION=${{ matrix.cuda_version }}
+            WORKFLOW=true
+          tags: |
+            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
