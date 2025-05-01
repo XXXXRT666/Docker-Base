@@ -36,8 +36,8 @@ ENV TARGETPLATFORM=${TARGETPLATFORM}
 
 ENV HOME="/root"
 
-RUN bash Docker/anaconda_install.sh
+COPY anaconda_install.sh /workspace
 
-ENV PATH="$HOME/anaconda3/bin:$PATH"
+RUN bash anaconda_install.sh && rm -rf /workspace/anaconda_install.sh
 
 SHELL ["/bin/bash", "-c"]
