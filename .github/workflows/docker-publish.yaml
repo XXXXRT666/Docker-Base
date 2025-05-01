@@ -178,7 +178,7 @@ jobs:
           tags: |
             xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: type=gha,mode=min
 
   merge-and-clean:
     needs:
