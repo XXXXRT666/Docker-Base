@@ -1,4 +1,4 @@
-name: Build and Publish Docker Base Image
+name: Build Tag Test
 
 on:
   workflow_dispatch:
