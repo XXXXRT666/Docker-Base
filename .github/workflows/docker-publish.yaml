@@ -88,7 +88,7 @@ jobs:
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base
+            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base-amd64
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -176,7 +176,7 @@ jobs:
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base
+            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base-arm64
           cache-from: type=gha
           cache-to: type=gha,mode=min
 
@@ -208,9 +208,9 @@ jobs:
           TAG_PREFIX=${{ matrix.tag_prefix }}
 
           docker buildx imagetools create \
-            --tag ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX} \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-amd64 \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-arm64
+            --tag ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-base \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-base-amd64 \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-base-arm64
 
       - name: Delete old platform-specific tags via Docker Hub API
         env:
