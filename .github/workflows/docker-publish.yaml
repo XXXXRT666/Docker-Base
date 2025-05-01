@@ -45,7 +45,6 @@ jobs:
           sudo rm -rf /opt/pipx
           sudo rm -rf /opt/az
           sudo rm -rf /opt/google
-
           
           sudo rm -rf /usr/lib/jvm
           sudo rm -rf /usr/lib/google-cloud-sdk
@@ -62,7 +61,6 @@ jobs:
           sudo rm -rf /usr/share/az_12.1.0
           sudo rm -rf /usr/share/dotnet
           
-
           echo "After cleanup:"
           df -h
 
