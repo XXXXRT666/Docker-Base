@@ -226,5 +226,4 @@ jobs:
 
             echo "Deleting tag: $LATEST_TAG"
             curl -X DELETE -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/$DOCKER_HUB_USERNAME/gpt-sovits/manifests/$LATEST_TAG
-            done
           done
