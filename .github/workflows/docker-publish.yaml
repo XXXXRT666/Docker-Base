@@ -201,7 +201,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
       - name: Merge amd64 and arm64 into multi-arch image
         run: |
@@ -215,7 +215,7 @@ jobs:
       - name: Delete old platform-specific tags via Docker Hub API
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_TOKEN }}
+          DOCKER_HUB_TOKEN: ${{ secrets.DOCKER_HUB_PASSWORD }}
           TAG_PREFIX: ${{ matrix.tag_prefix }}
         run: |
           sudo apt-get update && sudo apt-get install -y jq
