@@ -222,7 +222,7 @@ jobs:
 
           for PLATFORM in amd64 arm64; do
             SAFE_PLATFORM=$(echo $PLATFORM | sed 's/\//-/g')
-            LATEST_TAG="latest-${TAG_PREFIX}-${SAFE_PLATFORM}"
+            LATEST_TAG="latest-${TAG_PREFIX}-base-${SAFE_PLATFORM}"
 
             echo "Deleting tag: $LATEST_TAG"
             curl -X DELETE -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/$DOCKER_HUB_USERNAME/gpt-sovits/manifests/$LATEST_TAG
