@@ -86,7 +86,7 @@ jobs:
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base-amd64
+            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${{ matrix.tag_prefix }}-amd64
 
   build-arm64:
     runs-on: ubuntu-22.04-arm
@@ -130,7 +130,6 @@ jobs:
           sudo rm -rf /opt/az
           sudo rm -rf /opt/google
 
-          
           sudo rm -rf /usr/lib/jvm
           sudo rm -rf /usr/lib/google-cloud-sdk
           sudo rm -rf /usr/lib/dotnet
@@ -146,7 +145,6 @@ jobs:
           sudo rm -rf /usr/share/az_12.1.0
           sudo rm -rf /usr/share/dotnet
           
-
           echo "After cleanup:"
           df -h
 
@@ -172,7 +170,7 @@ jobs:
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base-arm64
+            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${{ matrix.tag_prefix }}-arm64
 
   merge-and-clean:
     needs:
@@ -202,9 +200,9 @@ jobs:
           TAG_PREFIX=${{ matrix.tag_prefix }}
 
           docker buildx imagetools create \
-            --tag ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-base \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-base-amd64 \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/gpt-sovits:latest-${TAG_PREFIX}-base-arm64
+            --tag ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${TAG_PREFIX} \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${TAG_PREFIX}-amd64 \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${TAG_PREFIX}-arm64
 
       - name: Delete old platform-specific tags via Docker Hub API
         env:
@@ -215,13 +213,13 @@ jobs:
           sudo apt-get update && sudo apt-get install -y jq
 
           TOKEN=$(curl -s -u $DOCKER_HUB_USERNAME:$DOCKER_HUB_TOKEN \
-          "https://auth.docker.io/token?service=registry.docker.io&scope=repository:xxxxrt666/gpt-sovits:pull,push,delete" \
+          "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$DOCKER_HUB_USERNAME/cuda-base:pull,push,delete" \
           | jq -r .token)
 
           for PLATFORM in amd64 arm64; do
             SAFE_PLATFORM=$(echo $PLATFORM | sed 's/\//-/g')
-            LATEST_TAG="latest-${TAG_PREFIX}-base-${SAFE_PLATFORM}"
+            LATEST_TAG="${TAG_PREFIX}-${SAFE_PLATFORM}"
 
             echo "Deleting tag: $LATEST_TAG"
-            curl -X DELETE -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/$DOCKER_HUB_USERNAME/gpt-sovits/manifests/$LATEST_TAG
+            curl -X DELETE -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/$DOCKER_HUB_USERNAME/cuda-base/manifests/$LATEST_TAG
           done

@@ -4,16 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  generate-meta:
-    runs-on: ubuntu-latest
-    outputs:
-      tag: ${{ steps.meta.outputs.tag }}
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
   build-and-push:
-    needs: generate-meta
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -42,7 +33,6 @@ jobs:
           sudo rm -rf /opt/pipx
           sudo rm -rf /opt/az
           sudo rm -rf /opt/google
-
           
           sudo rm -rf /usr/lib/jvm
           sudo rm -rf /usr/lib/google-cloud-sdk
@@ -58,7 +48,6 @@ jobs:
           sudo rm -rf /usr/share/miniconda
           sudo rm -rf /usr/share/az_12.1.0
           sudo rm -rf /usr/share/dotnet
-          
 
           echo "After cleanup:"
           df -h
@@ -85,5 +74,4 @@ jobs:
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            xxxxrt666/gpt-sovits:latest-${{ matrix.tag_prefix }}-base
-          cache-from: type=gha
+            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${{ matrix.tag_prefix }}
