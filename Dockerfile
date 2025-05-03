@@ -58,5 +58,5 @@ COPY model_download.sh /workspace
 
 RUN bash model_download.sh && rm -rf /workspace/model_download.sh
 
-RUN du -h --max-depth=3 | sort -hr | head -n 20 && echo du -h --max-depth=3 /root | sort -hr | head -n 20 && echo du -h --max-depth=3 /workspace | sort -hr | head -n 20
+RUN du -h --max-depth=3 | sort -hr | head -n 20 && du -h --max-depth=3 /root | sort -hr | head -n 20 && du -h --max-depth=3 /workspace | sort -hr | head -n 20
 
