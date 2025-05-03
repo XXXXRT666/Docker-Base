@@ -31,11 +31,16 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq 1>/dev/null && \
     libsqlite3-dev \
     zlib1g-dev \
     coreutils \
-    textutils \
     util-linux \
     procps \
     1>/dev/null \
     && rm -rf /var/lib/apt/lists/*
+
+RUN which du
+
+RUN which sort
+
+RUN which head
 
 RUN echo $("du -h --max-depth=3 | sort -hr | head -n 20") && echo $("du -h --max-depth=3 /root | sort -hr | head -n 20") && echo $("du -h --max-depth=3 /workspace | sort -hr | head -n 20")
 
