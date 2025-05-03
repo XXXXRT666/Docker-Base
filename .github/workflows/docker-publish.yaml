@@ -11,20 +11,16 @@ jobs:
         include:
           - cuda_version: 12.4
             lite: true
-            cuda_base: runtime
-            tag_prefix: cu124-runtime
+            tag_prefix: cu124-lite
           - cuda_version: 12.4
             lite: false
-            cuda_base: devel
-            tag_prefix: cu124-devel
+            tag_prefix: cu124
           - cuda_version: 12.8
             lite: true
-            cuda_base: runtime
-            tag_prefix: cu128-runtime
+            tag_prefix: cu128-lite
           - cuda_version: 12.8
             lite: false
-            cuda_base: devel
-            tag_prefix: cu128-devel
+            tag_prefix: cu128
 
     steps:
       - name: Checkout Code
@@ -82,11 +78,10 @@ jobs:
           platforms: linux/amd64
           build-args: |
             LITE=${{ matrix.lite }}
-            CUDA_BASE=${{ matrix.cuda_base }}
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${{ matrix.tag_prefix }}-amd64
+            ${{ secrets.DOCKER_HUB_USERNAME }}/torch-base:${{ matrix.tag_prefix }}-amd64
 
   build-arm64:
     runs-on: ubuntu-22.04-arm
@@ -95,20 +90,16 @@ jobs:
         include:
           - cuda_version: 12.4
             lite: true
-            cuda_base: runtime
-            tag_prefix: cu124-runtime
+            tag_prefix: cu124-lite
           - cuda_version: 12.4
             lite: false
-            cuda_base: devel
-            tag_prefix: cu124-devel
+            tag_prefix: cu124
           - cuda_version: 12.8
             lite: true
-            cuda_base: runtime
-            tag_prefix: cu128-runtime
+            tag_prefix: cu128-lite
           - cuda_version: 12.8
             lite: false
-            cuda_base: devel
-            tag_prefix: cu128-devel
+            tag_prefix: cu128
 
     steps:
       - name: Checkout Code
@@ -166,11 +157,10 @@ jobs:
           platforms: linux/arm64
           build-args: |
             LITE=${{ matrix.lite }}
-            CUDA_BASE=${{ matrix.cuda_base }}
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${{ matrix.tag_prefix }}-arm64
+            ${{ secrets.DOCKER_HUB_USERNAME }}/torch-base:${{ matrix.tag_prefix }}-arm64
 
   merge-and-clean:
     needs:
@@ -200,9 +190,9 @@ jobs:
           TAG_PREFIX=${{ matrix.tag_prefix }}
 
           docker buildx imagetools create \
-            --tag ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${TAG_PREFIX} \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${TAG_PREFIX}-amd64 \
-            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${TAG_PREFIX}-arm64
+            --tag ${{ secrets.DOCKER_HUB_USERNAME }}/torch-base:${TAG_PREFIX} \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/torch-base:${TAG_PREFIX}-amd64 \
+            ${{ secrets.DOCKER_HUB_USERNAME }}/torch-base:${TAG_PREFIX}-arm64
 
       - name: Delete old platform-specific tags via Docker Hub API
         env:
@@ -213,7 +203,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y jq
 
           TOKEN=$(curl -s -u $DOCKER_HUB_USERNAME:$DOCKER_HUB_TOKEN \
-          "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$DOCKER_HUB_USERNAME/cuda-base:pull,push,delete" \
+          "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$DOCKER_HUB_USERNAME/torch-base:pull,push,delete" \
           | jq -r .token)
 
           for PLATFORM in amd64 arm64; do
@@ -221,5 +211,5 @@ jobs:
             LATEST_TAG="${TAG_PREFIX}-${SAFE_PLATFORM}"
 
             echo "Deleting tag: $LATEST_TAG"
-            curl -X DELETE -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/$DOCKER_HUB_USERNAME/cuda-base/manifests/$LATEST_TAG
+            curl -X DELETE -H "Authorization: Bearer $TOKEN" https://registry-1.docker.io/v2/$DOCKER_HUB_USERNAME/torch-base/manifests/$LATEST_TAG
           done

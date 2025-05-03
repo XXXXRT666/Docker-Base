@@ -11,8 +11,7 @@ jobs:
         include:
           - cuda_version: 12.4
             lite: true
-            cuda_base: runtime
-            tag_prefix: cu124-runtime-test
+            tag_prefix: cu124-test
 
     steps:
       - name: Checkout Code
@@ -70,8 +69,7 @@ jobs:
           platforms: linux/amd64
           build-args: |
             LITE=${{ matrix.lite }}
-            CUDA_BASE=${{ matrix.cuda_base }}
             CUDA_VERSION=${{ matrix.cuda_version }}
             WORKFLOW=true
           tags: |
-            ${{ secrets.DOCKER_HUB_USERNAME }}/cuda-base:${{ matrix.tag_prefix }}
+            ${{ secrets.DOCKER_HUB_USERNAME }}/torch-base:${{ matrix.tag_prefix }}

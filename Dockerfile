@@ -1,10 +1,7 @@
-ARG CUDA_VERSION=12.4
-ARG CUDA_BASE=runtime
-
-FROM nvidia/cuda:${CUDA_VERSION}.1-cudnn-${CUDA_BASE}-ubuntu22.04
+FROM ubuntu:22.04
 
 LABEL maintainer="XXXXRT"
-LABEL version="V4-0501"
+LABEL version="V4-0503"
 LABEL description="Docker Base image for GPT-SoVITS"
 
 ARG CUDA_VERSION=12.4
@@ -13,9 +10,9 @@ ENV CUDA_VERSION=${CUDA_VERSION}
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq 1>/dev/null && \
   apt-get install -y -qq --no-install-recommends \
+    wget \
+    curl \
     build-essential \
-    gcc \
-    g++ \
     wget \
     curl \
     unzip \
@@ -25,6 +22,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq 1>/dev/null && \
     procps \
     ca-certificates \
     locales \
+    libssl-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    zlib1g-dev \
     1>/dev/null \
     && rm -rf /var/lib/apt/lists/*
 
@@ -41,5 +44,11 @@ WORKDIR /workspace
 COPY anaconda_install.sh /workspace
 
 RUN bash anaconda_install.sh && rm -rf /workspace/anaconda_install.sh
+
+ENV PATH="$HOME/anaconda3/bin:$PATH"
+
+COPY model_download.sh /workspace
+
+RUN bash model_download.sh && rm -rf /workspace/model_download.sh
 
 SHELL ["/bin/bash", "-c"]
