@@ -46,6 +46,7 @@ mkdir /workspace/models/pretrained_models
 mkdir /workspace/models/uvr5_weights
 
 PRETRINED_URL="https://huggingface.co/XXXXRT/GPT-SoVITS-Pretrained/resolve/main/pretrained_models.zip"
+G2PW_URL="https://huggingface.co/XXXXRT/GPT-SoVITS-Pretrained/resolve/main/G2PWModel.zip"
 UVR5_URL="https://huggingface.co/XXXXRT/GPT-SoVITS-Pretrained/resolve/main/uvr5_weights.zip"
 
 $WGET_CMD "$PRETRINED_URL"
@@ -54,6 +55,12 @@ unzip -q pretrained_models.zip
 rm -rf pretrained_models.zip
 mv pretrained_models/* /workspace/models/pretrained_models
 rm -rf pretrained_models
+
+$WGET_CMD "$G2PW_URL"
+
+unzip -q G2PWModel.zip
+rm -rf G2PWModel.zip
+mv G2PWModel /workspace/models
 
 $WGET_CMD "$UVR5_URL"
 
