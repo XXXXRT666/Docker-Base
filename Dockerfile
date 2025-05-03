@@ -36,6 +36,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq 1>/dev/null && \
     1>/dev/null \
     && rm -rf /var/lib/apt/lists/*
 
+RUN du -h --max-depth=3 | sort -hr | head -n 20
+
 ARG WORKFLOW=false
 ENV WORKFLOW=${WORKFLOW}
 
@@ -56,5 +58,5 @@ COPY model_download.sh /workspace
 
 RUN bash model_download.sh && rm -rf /workspace/model_download.sh
 
-RUN \du -h --max-depth=3 | sort -hr | head -n 20 && echo du -h --max-depth=3 /root | sort -hr | head -n 20 && echo du -h --max-depth=3 /workspace | sort -hr | head -n 20
+RUN du -h --max-depth=3 | sort -hr | head -n 20 && echo du -h --max-depth=3 /root | sort -hr | head -n 20 && echo du -h --max-depth=3 /workspace | sort -hr | head -n 20
 
