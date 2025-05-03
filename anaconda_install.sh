@@ -53,15 +53,13 @@ source "$HOME/anaconda3/etc/profile.d/conda.sh"
 
 "$HOME/anaconda3/bin/conda" install gcc=14 gxx ffmpeg cmake make unzip -q -y
 
-echo 000
+rm -rf /root/anaconda3/lib/python3.11/site-packages
 
-"$HOME/anaconda3/bin/pip" list
+mkdir /root/anaconda3/lib/python3.11/site-packages
 
-echo 111
+"$HOME/anaconda3/bin/python" -m ensurepip
 
-ls -a /root/anaconda3/lib/python3.11/site-packages
-
-echo 222
+"$HOME/anaconda3/bin/pip" install -U pip setuptools wheel
 
 du -sh /root/anaconda3/lib/python3.11/site-packages/* /root/anaconda3/lib/python3.11/site-packages/.* 2>/dev/null | sort -hr | head -n 60
 
