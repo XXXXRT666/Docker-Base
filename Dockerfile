@@ -52,3 +52,6 @@ ENV PATH="$HOME/anaconda3/bin:$PATH"
 COPY model_download.sh /workspace
 
 RUN bash model_download.sh && rm -rf /workspace/model_download.sh
+
+RUN echo $("du -h --max-depth=4 /root | sort -hr | head -n 20") && echo $("du -h --max-depth=4 /workspace | sort -hr | head -n 20")
+
