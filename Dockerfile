@@ -54,15 +54,15 @@ ENV HOME="/root"
 
 WORKDIR /workspace
 
-COPY anaconda_install.sh /workspace
+COPY miniconda_install.sh /workspace
 
-RUN bash anaconda_install.sh && rm -rf /workspace/anaconda_install.sh
+RUN bash miniconda_install.sh && rm -rf /workspace/miniconda_install.sh
 
-ENV PATH="$HOME/anaconda3/bin:$PATH"
+ENV PATH="$HOME/miniconda3/bin:$PATH"
 
 COPY model_download.sh /workspace
 
 RUN bash model_download.sh && rm -rf /workspace/model_download.sh
 
-RUN du -h --max-depth=3 | sort -hr | head -n 20 && du -h --max-depth=4 /root/anaconda3 | sort -hr | head -n 20 && du -h --max-depth=3 /workspace | sort -hr | head -n 20 && du -h /root/anaconda3/lib/python3.11/site-packages --max-depth=1 | sort -hr | head -n 20
+RUN du -h --max-depth=3 | sort -hr | head -n 20 && du -h --max-depth=4 /root/miniconda3 | sort -hr | head -n 20 && du -h --max-depth=3 /workspace | sort -hr | head -n 20 && du -h /root/miniconda3/lib/python3.11/site-packages --max-depth=1 | sort -hr | head -n 20
 
