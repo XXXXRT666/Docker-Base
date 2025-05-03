@@ -53,10 +53,6 @@ source "$HOME/anaconda3/etc/profile.d/conda.sh"
 
 "$HOME/anaconda3/bin/conda" install gcc=14 gxx ffmpeg cmake make unzip -q -y
 
-echo 000
-
-du -h /root/anaconda3/lib/python3.11/site-packages --max-depth=1
-
 echo 111
 
 "$HOME/anaconda3/bin/pip" list
@@ -65,7 +61,7 @@ ls /root/anaconda3/lib/python3.11/site-packages
 
 echo 222
 
-du -h /root/anaconda3/lib/python3.11/site-packages --max-depth=1 | sort -hr | head -n 20
+du -h /root/anaconda3/lib/python3.11/site-packages --max-depth=1 | sort -hr | head -n 60
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/anaconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
