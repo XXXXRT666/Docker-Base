@@ -64,5 +64,5 @@ COPY model_download.sh /workspace
 
 RUN bash model_download.sh && rm -rf /workspace/model_download.sh
 
-RUN du -h --max-depth=3 | sort -hr | head -n 20 && du -h --max-depth=4 /root/anaconda3 | sort -hr | head -n 20 && du -h --max-depth=3 /workspace | sort -hr | head -n 20
+RUN du -h --max-depth=3 | sort -hr | head -n 20 && du -h --max-depth=4 /root/anaconda3 | sort -hr | head -n 20 && du -h --max-depth=3 /workspace | sort -hr | head -n 20 && du -h /root/anaconda3/lib/python3.11/site-packages --max-depth=1 | sort -hr | head -n 20
 
