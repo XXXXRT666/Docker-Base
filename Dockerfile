@@ -30,6 +30,9 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq 1>/dev/null && \
     libreadline-dev \
     libsqlite3-dev \
     zlib1g-dev \
+    coreutils \
+    util-linux \
+    procps \
     1>/dev/null \
     && rm -rf /var/lib/apt/lists/*
 
