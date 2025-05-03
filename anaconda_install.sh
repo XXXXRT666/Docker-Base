@@ -61,8 +61,6 @@ mkdir /root/anaconda3/lib/python3.11/site-packages
 
 "$HOME/anaconda3/bin/pip" install -U pip setuptools wheel
 
-du -sh /root/anaconda3/lib/python3.11/site-packages/* /root/anaconda3/lib/python3.11/site-packages/.* 2>/dev/null | sort -hr | head -n 60
-
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/anaconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
 elif [ "$CUDA_VERSION" = "12.4" ]; then
