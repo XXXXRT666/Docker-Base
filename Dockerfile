@@ -8,6 +8,12 @@ ARG CUDA_VERSION=12.4
 
 ENV CUDA_VERSION=${CUDA_VERSION}
 
+ARG LITE=false
+ENV LITE=${LITE}
+
+ARG WORKFLOW=false
+ENV WORKFLOW=${WORKFLOW}
+
 SHELL ["/bin/bash", "-c"]
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update -qq 1>/dev/null && \
