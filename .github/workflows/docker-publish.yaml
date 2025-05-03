@@ -170,10 +170,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - tag_prefix: cu124-runtime
-          - tag_prefix: cu124-devel
-          - tag_prefix: cu128-runtime
-          - tag_prefix: cu128-devel
+          - tag_prefix: cu124-lite
+          - tag_prefix: cu124-full
+          - tag_prefix: cu128-lite
+          - tag_prefix: cu128-full
 
     steps:
       - name: Set up Docker Buildx
