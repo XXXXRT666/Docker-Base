@@ -11,16 +11,16 @@ jobs:
         include:
           - cuda_version: 12.4
             lite: true
-            tag_prefix: cu124-lite
+            tag_prefix: cu12.4-lite
           - cuda_version: 12.4
             lite: false
-            tag_prefix: cu124-full
+            tag_prefix: cu12.4-full
           - cuda_version: 12.8
             lite: true
-            tag_prefix: cu128-lite
+            tag_prefix: cu12.8-lite
           - cuda_version: 12.8
             lite: false
-            tag_prefix: cu128-full
+            tag_prefix: cu12.8-full
 
     steps:
       - name: Checkout Code
