@@ -60,7 +60,7 @@ RUN bash miniconda_install.sh && rm -rf /workspace/miniconda_install.sh
 
 ENV PATH="$HOME/miniconda3/bin:$PATH"
 
-RUN echo $LD_LIBRARY_PATH$
+RUN echo $LD_LIBRARY_PATH
 
 ENV LD_LIBRARY_PATH="/root/miniconda3/lib/python3.11/site-packages/nvidia/cudnn/lib:$LD_LIBRARY_PATH"
 
