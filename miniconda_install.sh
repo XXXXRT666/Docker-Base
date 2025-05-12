@@ -51,7 +51,7 @@ source "$HOME/miniconda3/etc/profile.d/conda.sh"
 
 "$HOME/miniconda3/bin/conda" install python=3.11 -q -y
 
-"$HOME/miniconda3/bin/conda" install gcc=14 gxx ffmpeg cmake make unzip -q -y
+"$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip -q -y
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
