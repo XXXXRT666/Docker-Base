@@ -4,7 +4,7 @@ LABEL maintainer="XXXXRT"
 LABEL version="V4-0503"
 LABEL description="Docker Base image for GPT-SoVITS"
 
-ARG CUDA_VERSION=12.4
+ARG CUDA_VERSION=12.6
 
 ENV CUDA_VERSION=${CUDA_VERSION}
 
