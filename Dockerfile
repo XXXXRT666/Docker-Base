@@ -16,7 +16,7 @@ ENV WORKFLOW=${WORKFLOW}
 
 SHELL ["/bin/bash", "-c"]
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
+RUN DEBIAN_FRONTEND=noninteractive do-release-upgrade && apt-get update && \
   apt-get install -y -qq --no-install-recommends \
     wget \
     curl \
