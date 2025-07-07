@@ -18,11 +18,11 @@ SHELL ["/bin/bash", "-c"]
 
 RUN cd /etc/apt && \
 mkdir test && \
-cp sources.lst test && \
+cp sources.list test && \
 cd test && \
 sed -i -- 's/us.archive/old-releases/g' * && \
 sed -i -- 's/security/old-releases/g' * && \
-cp sources.lst ../ && 
+cp sources.list ../ && 
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   apt-get install -y -qq --no-install-recommends \
