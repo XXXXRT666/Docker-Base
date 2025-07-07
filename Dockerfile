@@ -19,29 +19,17 @@ SHELL ["/bin/bash", "-c"]
 RUN cat /etc/apt/sources.list
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
-  apt-get install -y -qq --no-install-recommends \
+  apt-get install -y --no-install-recommends \
     wget \
-    curl \
     build-essential \
-    wget \
     curl \
-    unzip \
     git \
-    nano \
     htop \
-    procps \
     ca-certificates \
     locales \
-    libssl-dev \
-    libbz2-dev \
-    liblzma-dev \
-    libreadline-dev \
-    libsqlite3-dev \
-    zlib1g-dev \
     coreutils \
     util-linux \
     procps \
-    1>/dev/null \
     && rm -rf /var/lib/apt/lists/*
 
 RUN du -h --max-depth=3 | sort -hr | head -n 20
