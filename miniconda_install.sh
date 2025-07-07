@@ -61,10 +61,10 @@ source "$HOME/.bashrc"
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
-    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.8 -c nvidia
+    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.8 cuda-cudart-dev -c nvidia
 elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
-    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -c nvidia
+    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 cuda-cudart-dev -c nvidia
 fi
 
 export PATH="$HOME/miniconda3/bin:$PATH"
