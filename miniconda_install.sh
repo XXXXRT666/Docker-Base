@@ -57,7 +57,7 @@ source "$HOME/.bashrc"
 
 "$HOME/miniconda3/bin/conda" install python=3.11 -q -y
 
-"$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=14" -q -y
+"$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -q -y
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
@@ -66,6 +66,8 @@ elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
     "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 cuda-cudart-dev -c nvidia
 fi
+
+echo 111
 
 echo "$(ls /root/miniconda3/targets)"
 
@@ -76,6 +78,7 @@ CUDA_PATH="$HOME/miniconda3/targets/$(uname -m)-linux"
 export CUDA_HOME=$CUDA_PATH
 export PATH="$HOME/miniconda3/bin:$PATH"
 export PATH="$CUDA_HOME/bin:$PATH"
+export PATH="$CUDA_HOME/nvvm/bin:$PATH"
 
 NVCC_THREADS=2 "$HOME/miniconda3/bin/pip" install 'git+https://github.com/Dao-AILab/flash-attention.git@v2.7.4.post1#egg=flash-attn'
 
