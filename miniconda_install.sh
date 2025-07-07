@@ -62,7 +62,7 @@ elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
     "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -c nvidia
 fi
-"$HOME/miniconda3/bin/pip" https://github.com/Dao-AILab/flash-attention/archive/refs/tags/v2.7.4.post1.tar.gz
+"$HOME/miniconda3/bin/pip" install https://github.com/Dao-AILab/flash-attention/archive/refs/tags/v2.7.4.post1.tar.gz
 
 "$HOME/miniconda3/bin/pip" cache purge
 
