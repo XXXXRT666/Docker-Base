@@ -67,13 +67,7 @@ elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 cuda-cudart-dev -c nvidia
 fi
 
-echo 111
-
-echo "$(ls /root/miniconda3/targets)"
-
-echo "$(ls /root/miniconda3)"
-
-CUDA_PATH="$HOME/miniconda3/targets/$(uname -m)-linux"
+CUDA_PATH=$(echo "$HOME/miniconda3/targets/"*-linux | awk '{print $1}')
 
 export CUDA_HOME=$CUDA_PATH
 export PATH="$HOME/miniconda3/bin:$PATH"
