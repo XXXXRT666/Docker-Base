@@ -16,13 +16,9 @@ ENV WORKFLOW=${WORKFLOW}
 
 SHELL ["/bin/bash", "-c"]
 
-RUN cd /etc/apt && \
-mkdir test && \
-cp sources.list test && \
-cd test && \
-sed -i -- 's/us.archive/old-releases/g' * && \
-sed -i -- 's/security/old-releases/g' * && \
-cp sources.list ../ && 
+RUN cat /etc/apt/sources.list
+
+RUN sed -i 's|us.archive.ubuntu.com|old-releases.ubuntu.com|g; s|security.ubuntu.com|old-releases.ubuntu.com|g' /etc/apt/sources.list
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   apt-get install -y -qq --no-install-recommends \
