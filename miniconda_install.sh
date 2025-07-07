@@ -65,7 +65,7 @@ fi
 source "$HOME/miniconda3/etc/profile.d/conda.sh"
 env
 echo "[INFO]: $(which nvcc)"
-"$HOME/miniconda3/bin/pip" install 'git+https://github.com/Dao-AILab/flash-attention.git@v2.7.4.post1#egg=flash-attn'
+NVCC_THREADS=2 "$HOME/miniconda3/bin/pip" install 'git+https://github.com/Dao-AILab/flash-attention.git@v2.7.4.post1#egg=flash-attn'
 
 "$HOME/miniconda3/bin/pip" cache purge
 
