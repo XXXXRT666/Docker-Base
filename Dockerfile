@@ -18,8 +18,6 @@ SHELL ["/bin/bash", "-c"]
 
 RUN cat /etc/apt/sources.list
 
-RUN sed -i 's|us.archive.ubuntu.com|old-releases.ubuntu.com|g; s|security.ubuntu.com|old-releases.ubuntu.com|g' /etc/apt/sources.list
-
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
   apt-get install -y -qq --no-install-recommends \
     wget \
