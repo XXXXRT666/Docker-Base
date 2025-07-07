@@ -23,8 +23,10 @@ fi
 
 if [ "$TARGETPLATFORM" = "linux/amd64" ]; then
     "${WGET_CMD[@]}" -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py311_25.3.1-1-Linux-x86_64.sh
+    SYSROOT_PKG="sysroot_linux-64>=2.28"
 elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then
     "${WGET_CMD[@]}" -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py311_25.3.1-1-Linux-aarch64.sh
+    SYSROOT_PKG="sysroot_linux-aarch64>=2.28"
 else
     exit 1
 fi
@@ -51,13 +53,16 @@ source "$HOME/miniconda3/etc/profile.d/conda.sh"
 
 "$HOME/miniconda3/bin/conda" install python=3.11 -q -y
 
-"$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip -q -y
+"$HOME/miniconda3/bin/conda" install gcc=14 gxx ffmpeg cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=14" -q -y
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
+    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.8 -c nvidia
 elif [ "$CUDA_VERSION" = "12.6" ]; then
-    "$HOME/miniconda3/bin/pip" install torch==2.6 torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
+    "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
+    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -c nvidia
 fi
+"$HOME/miniconda3/bin/pip" https://github.com/Dao-AILab/flash-attention/archive/refs/tags/v2.7.4.post1.tar.gz
 
 "$HOME/miniconda3/bin/pip" cache purge
 
