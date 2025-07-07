@@ -63,6 +63,7 @@ elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -c nvidia
 fi
 source "$HOME/miniconda3/etc/profile.d/conda.sh"
+env
 echo "[INFO]: $(which nvcc)"
 "$HOME/miniconda3/bin/pip" install 'git+https://github.com/Dao-AILab/flash-attention.git@v2.7.4.post1#egg=flash-attn'
 
