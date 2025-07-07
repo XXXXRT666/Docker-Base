@@ -74,7 +74,7 @@ export PATH="$HOME/miniconda3/bin:$PATH"
 export PATH="$CUDA_HOME/bin:$PATH"
 export PATH="$CUDA_HOME/nvvm/bin:$PATH"
 
-NVCC_THREADS=2 "$HOME/miniconda3/bin/pip" install 'git+https://github.com/Dao-AILab/flash-attention.git@v2.7.4.post1#egg=flash-attn'
+NVCC_THREADS=2 "$HOME/miniconda3/bin/pip" install 'flash_attn'
 
 "$HOME/miniconda3/bin/pip" cache purge
 
