@@ -75,7 +75,7 @@ export PATH="$CUDA_HOME/bin:$PATH"
 export PATH="$CUDA_HOME/nvvm/bin:$PATH"
 
 "$HOME/miniconda3/bin/pip" install psutil ninja packaging wheel "setuptools>=42"
-"$HOME/miniconda3/bin/pip" install https://github.com/XXXXRT666/flash-attention/releases/download/v2.8.1/flash_attn-2.8.1.tar.gz --no-build-isolation
+"$HOME/miniconda3/bin/pip" install flash-attn -i https://xxxxrt666.github.io/PIP-Index/ --no-build-isolation
 
 "$HOME/miniconda3/bin/pip" cache purge
 
