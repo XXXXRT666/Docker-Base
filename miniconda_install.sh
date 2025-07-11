@@ -74,7 +74,7 @@ export PATH="$HOME/miniconda3/bin:$PATH"
 # export PATH="$CUDA_HOME/bin:$PATH"
 # export PATH="$CUDA_HOME/nvvm/bin:$PATH"
 
-"$HOME/miniconda3/bin/pip" install psutil ninja packaging wheel "setuptools>=42"
+"$HOME/miniconda3/bin/pip" install psutil ninja packaging wheel "setuptools>=42" einops
 "$HOME/miniconda3/bin/pip" install flash-attn -i https://xxxxrt666.github.io/PIP-Index/ --no-build-isolation
 
 "$HOME/miniconda3/bin/pip" cache purge
