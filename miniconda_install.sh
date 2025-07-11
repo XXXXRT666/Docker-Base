@@ -67,12 +67,12 @@ elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -c nvidia
 fi
 
-CUDA_PATH=$(echo "$HOME/miniconda3/targets/"*-linux | awk '{print $1}')
+# CUDA_PATH=$(echo "$HOME/miniconda3/targets/"*-linux | awk '{print $1}')
 
-export CUDA_HOME=$CUDA_PATH
+# export CUDA_HOME=$CUDA_PATH
 export PATH="$HOME/miniconda3/bin:$PATH"
-export PATH="$CUDA_HOME/bin:$PATH"
-export PATH="$CUDA_HOME/nvvm/bin:$PATH"
+# export PATH="$CUDA_HOME/bin:$PATH"
+# export PATH="$CUDA_HOME/nvvm/bin:$PATH"
 
 "$HOME/miniconda3/bin/pip" install psutil ninja packaging wheel "setuptools>=42"
 "$HOME/miniconda3/bin/pip" install flash-attn -i https://xxxxrt666.github.io/PIP-Index/ --no-build-isolation
