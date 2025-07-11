@@ -68,7 +68,6 @@ elif [ "$CUDA_VERSION" = "12.6" ]; then
 fi
 
 # CUDA_PATH=$(echo "$HOME/miniconda3/targets/"*-linux | awk '{print $1}')
-
 # export CUDA_HOME=$CUDA_PATH
 export PATH="$HOME/miniconda3/bin:$PATH"
 # export PATH="$CUDA_HOME/bin:$PATH"
