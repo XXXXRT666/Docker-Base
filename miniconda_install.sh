@@ -51,9 +51,11 @@ source "$HOME/miniconda3/etc/profile.d/conda.sh"
 
 source "$HOME/.bashrc"
 
+"$HOME/miniconda3/bin/conda" config --add channels conda-forge
+
 "$HOME/miniconda3/bin/conda" config --remove channels defaults
 
-"$HOME/miniconda3/bin/conda" config --add channels conda-forge
+"$HOME/miniconda3/bin/conda" config --show channels
 
 "$HOME/miniconda3/bin/conda" update -q --all -y 1>/dev/null
 
