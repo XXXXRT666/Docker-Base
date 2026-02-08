@@ -51,6 +51,9 @@ source "$HOME/miniconda3/etc/profile.d/conda.sh"
 
 source "$HOME/.bashrc"
 
+"$HOME/miniconda3/bin/conda" tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+"$HOME/miniconda3/bin/conda" tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+
 "$HOME/miniconda3/bin/conda" info
 
 "$HOME/miniconda3/bin/conda" config --add channels conda-forge
@@ -61,7 +64,7 @@ cat /root/.condarc
 
 cat /root/.condarc
 
-"$HOME/miniconda3/bin/conda" update --all -y -c conda-forge 1>/dev/null
+"$HOME/miniconda3/bin/conda" update --all -y -c conda-forge
 
 "$HOME/miniconda3/bin/conda" install python=3.11 -c conda-forge -q -y
 
