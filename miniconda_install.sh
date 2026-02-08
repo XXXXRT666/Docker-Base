@@ -51,20 +51,22 @@ source "$HOME/miniconda3/etc/profile.d/conda.sh"
 
 source "$HOME/.bashrc"
 
+"$HOME/miniconda3/bin/conda" config --remove channels defaults || true
+
 "$HOME/miniconda3/bin/conda" config --add channels conda-forge
 
 "$HOME/miniconda3/bin/conda" update -q --all -y 1>/dev/null
 
 "$HOME/miniconda3/bin/conda" install python=3.11 -q -y
 
-"$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -q -y
+"$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -q -y -c conda-forge
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
-    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.8 -c nvidia
+    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.8 -c conda-forge
 elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
-    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -c nvidia
+    "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -c conda-forge
 fi
 
 # CUDA_PATH=$(echo "$HOME/miniconda3/targets/"*-linux | awk '{print $1}')
