@@ -61,6 +61,10 @@ source "$HOME/.bashrc"
 
 "$HOME/miniconda3/bin/conda" config --show channels
 
+"$HOME/miniconda3/bin/conda" config --remove channels defaults
+
+"$HOME/miniconda3/bin/conda" config --add channels conda-forge
+
 "$HOME/miniconda3/bin/conda" update --all -y -c conda-forge 1>/dev/null
 
 "$HOME/miniconda3/bin/conda" install python=3.11 -c conda-forge -q -y
