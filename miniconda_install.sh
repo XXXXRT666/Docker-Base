@@ -22,10 +22,10 @@ else
 fi
 
 if [ "$TARGETPLATFORM" = "linux/amd64" ]; then
-    "${WGET_CMD[@]}" -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py311_25.3.1-1-Linux-x86_64.sh
+    "${WGET_CMD[@]}" -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py311_25.11.1-1-Linux-x86_64.sh
     SYSROOT_PKG="sysroot_linux-64>=2.28"
 elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then
-    "${WGET_CMD[@]}" -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py311_25.3.1-1-Linux-aarch64.sh
+    "${WGET_CMD[@]}" -O miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-py311_25.11.1-1-Linux-aarch64.sh
     SYSROOT_PKG="sysroot_linux-aarch64>=2.28"
 else
     exit 1
