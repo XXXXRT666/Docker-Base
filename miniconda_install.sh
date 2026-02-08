@@ -59,6 +59,8 @@ cat /root/miniconda3/.condarc
 
 cat /root/miniconda3/.condarc
 
+cat /root/.condarc
+
 "$HOME/miniconda3/bin/conda" config --add channels conda-forge
 
 cat /root/miniconda3/.condarc
