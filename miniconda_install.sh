@@ -53,12 +53,6 @@ source "$HOME/.bashrc"
 
 "$HOME/miniconda3/bin/conda" info
 
-cat /root/.condarc
-
-"$HOME/miniconda3/bin/conda" config --remove-key channels
-
-cat /root/.condarc
-
 "$HOME/miniconda3/bin/conda" config --add channels conda-forge
 
 cat /root/.condarc
