@@ -51,15 +51,17 @@ source "$HOME/miniconda3/etc/profile.d/conda.sh"
 
 source "$HOME/.bashrc"
 
+"$HOME/miniconda3/bin/conda" info
+
 "$HOME/miniconda3/bin/conda" config --remove-key channels
 
 "$HOME/miniconda3/bin/conda" config --add channels conda-forge
 
 "$HOME/miniconda3/bin/conda" config --show channels
 
-"$HOME/miniconda3/bin/conda" update -q --all -y 1>/dev/null
+"$HOME/miniconda3/bin/conda" update --all -y -c conda-forge 1>/dev/null
 
-"$HOME/miniconda3/bin/conda" install python=3.11 -q -y
+"$HOME/miniconda3/bin/conda" install python=3.11 -c conda-forge -q -y
 
 "$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -q -y -c conda-forge
 
