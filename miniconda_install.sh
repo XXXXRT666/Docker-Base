@@ -55,6 +55,8 @@ source "$HOME/.bashrc"
 
 "$HOME/miniconda3/bin/conda" config --remove-key channels
 
+"$HOME/miniconda3/bin/conda" config --show channels
+
 "$HOME/miniconda3/bin/conda" config --add channels conda-forge
 
 "$HOME/miniconda3/bin/conda" config --show channels
