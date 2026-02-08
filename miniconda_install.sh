@@ -66,18 +66,14 @@ source "$HOME/.bashrc"
 "$HOME/miniconda3/bin/conda" install gcc=11 gxx ffmpeg cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -y
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
-    "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
+    "$HOME/miniconda3/bin/pip" install torch torchcodec --no-cache-dir --index-url https://download.pytorch.org/whl/cu128
     "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.8 -y
 elif [ "$CUDA_VERSION" = "12.6" ]; then
-    "$HOME/miniconda3/bin/pip" install torch torchaudio --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
+    "$HOME/miniconda3/bin/pip" install torch torchcodec --no-cache-dir --index-url https://download.pytorch.org/whl/cu126
     "$HOME/miniconda3/bin/conda" install cuda-nvcc=12.6 -y
 fi
 
-# CUDA_PATH=$(echo "$HOME/miniconda3/targets/"*-linux | awk '{print $1}')
-# export CUDA_HOME=$CUDA_PATH
 export PATH="$HOME/miniconda3/bin:$PATH"
-# export PATH="$CUDA_HOME/bin:$PATH"
-# export PATH="$CUDA_HOME/nvvm/bin:$PATH"
 
 "$HOME/miniconda3/bin/pip" install psutil ninja packaging wheel "setuptools>=42" einops
 "$HOME/miniconda3/bin/pip" install flash-attn -i https://xxxxrt666.github.io/PIP-Index/ --no-build-isolation
