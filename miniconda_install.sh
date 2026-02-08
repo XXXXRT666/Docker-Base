@@ -51,18 +51,13 @@ source "$HOME/miniconda3/etc/profile.d/conda.sh"
 
 source "$HOME/.bashrc"
 
-"$HOME/miniconda3/bin/conda" tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
-"$HOME/miniconda3/bin/conda" tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-
 "$HOME/miniconda3/bin/conda" info
 
 "$HOME/miniconda3/bin/conda" config --add channels conda-forge
 
-cat /root/.condarc
-
 "$HOME/miniconda3/bin/conda" config --remove channels defaults
 
-cat /root/.condarc
+"$HOME/miniconda3/bin/conda" config --set channel_priority strict
 
 "$HOME/miniconda3/bin/conda" update --all -y -c conda-forge
 
