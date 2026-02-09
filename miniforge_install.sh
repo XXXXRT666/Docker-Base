@@ -70,7 +70,7 @@ fi
 export PATH="$HOME/conda/bin:$PATH"
 
 "$HOME/conda/bin/pip" install psutil ninja packaging wheel "setuptools>=42" einops
-"$HOME/conda/bin/pip" install flash-attn -i https://xxxxrt666.github.io/PIP-Index/ --no-build-isolation
+"$HOME/conda/bin/pip" install flash-attn -i https://xxxxrt666.github.io/PIP-Index/ --no-build-isolation -vv
 "$HOME/conda/bin/pip" cache purge
 
 rm $LOG_PATH
