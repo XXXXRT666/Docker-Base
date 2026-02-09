@@ -22,10 +22,10 @@ else
 fi
 
 if [ "$TARGETPLATFORM" = "linux/amd64" ]; then
-    "${WGET_CMD[@]}" Miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+    "${WGET_CMD[@]}" -O Miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
     SYSROOT_PKG="sysroot_linux-64>=2.28"
 elif [ "$TARGETPLATFORM" = "linux/arm64" ]; then
-    "${WGET_CMD[@]}" Miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
+    "${WGET_CMD[@]}" -O Miniforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh"
     SYSROOT_PKG="sysroot_linux-aarch64>=2.28"
 else
     exit 1
@@ -38,7 +38,7 @@ bash Miniforge.sh -b -p "$HOME/conda" >"$LOG_PATH" 2>&1
 if [ $? -eq 0 ]; then
     echo "== Miniforge Installed =="
 else
-    echo "Failed to Install Miniforge"
+    echo "Failed to Install miniforge"
     tail -n 50 "$LOG_PATH"
     exit 1
 fi
