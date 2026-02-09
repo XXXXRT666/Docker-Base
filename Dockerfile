@@ -44,21 +44,21 @@ ENV HOME="/root"
 
 WORKDIR /workspace
 
-COPY miniconda_install.sh /workspace
+COPY miniforge_install.sh /workspace
 
-RUN bash miniconda_install.sh && rm -rf /workspace/miniconda_install.sh
+RUN bash miniforge_install.sh && rm -rf /workspace/miniforge_install.sh
 
-ENV PATH="$HOME/miniconda3/bin:$PATH"
+ENV PATH="$HOME/conda/bin:$PATH"
 
 RUN echo $LD_LIBRARY_PATH
 
-ENV LD_LIBRARY_PATH="/root/miniconda3/lib/python3.11/site-packages/nvidia/cudnn/lib:$LD_LIBRARY_PATH"
+ENV LD_LIBRARY_PATH="/root/conda/lib/python3.12/site-packages/nvidia/cudnn/lib:$LD_LIBRARY_PATH"
 
-ENV LD_LIBRARY_PATH="/root/miniconda3/lib/python3.11/site-packages/nvidia/cublas/lib:$LD_LIBRARY_PATH"
+ENV LD_LIBRARY_PATH="/root/conda/lib/python3.12/site-packages/nvidia/cublas/lib:$LD_LIBRARY_PATH"
 
 COPY model_download.sh /workspace
 
 RUN bash model_download.sh && rm -rf /workspace/model_download.sh
 
-RUN du -h --max-depth=3 | sort -hr | head -n 20 && du -h --max-depth=4 /root/miniconda3 | sort -hr | head -n 20 && du -h --max-depth=3 /workspace | sort -hr | head -n 20 && du -h /root/miniconda3/lib/python3.11/site-packages --max-depth=1 | sort -hr | head -n 20
+RUN du -h --max-depth=3 | sort -hr | head -n 20 && du -h --max-depth=4 /root/conda | sort -hr | head -n 20 && du -h --max-depth=3 /workspace | sort -hr | head -n 20 && du -h /root/conda/lib/python3.12/site-packages --max-depth=1 | sort -hr | head -n 20
 
