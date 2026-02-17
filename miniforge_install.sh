@@ -6,6 +6,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
 cd "$SCRIPT_DIR" || exit 1
 
+echo $(pwd)
+
+ls
+
 cd .. || exit 1
 
 if [ -d "$HOME/conda" ]; then
