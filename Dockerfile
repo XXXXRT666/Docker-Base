@@ -46,7 +46,7 @@ WORKDIR /workspace
 
 COPY miniforge_install.sh /workspace
 
-ENV UV_SYSTEM_PYTHON=true
+ENV UV_PYTHON="$HOME/conda/bin/python"
 
 RUN bash miniforge_install.sh && rm -rf /workspace/miniforge_install.sh
 
