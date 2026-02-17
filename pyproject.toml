@@ -7,7 +7,6 @@ name = "GPT-SoVITS-Docker-Meta"
 description = "GPT-SoVITS: A Powerful Few-shot Text-to-Speech Project"
 version = "5.0.0.dev0+V2Pro"
 authors = [{ name = "XXXXRT" }]
-readme = "README.md"
 classifiers = [
   "Development Status :: 5 - Production/Stable",
 
