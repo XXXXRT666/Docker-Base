@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 LABEL maintainer="XXXXRT"
-LABEL version="V4-0503"
+LABEL version="V2P-0217"
 LABEL description="Docker Base image for GPT-SoVITS"
 
 ARG CUDA_VERSION=12.6
@@ -44,9 +44,9 @@ ENV HOME="/root"
 
 WORKDIR /workspace
 
-COPY miniforge_install.sh /workspace
+COPY . /workspace
 
-RUN bash miniforge_install.sh && rm -rf /workspace/miniforge_install.sh
+RUN bash miniforge_install.sh && rm -rf /workspace/*
 
 ENV PATH="$HOME/conda/bin:$PATH"
 
