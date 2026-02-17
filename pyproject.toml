@@ -1,0 +1,101 @@
+[build-system]
+requires = ["hatchling", "hatch-requirements-txt"]
+build-backend = "hatchling.build"
+
+[project]
+name = "GPT-SoVITS-Docker-Meta"
+description = "GPT-SoVITS: A Powerful Few-shot Text-to-Speech Project"
+version = "5.0.0.dev0+V2Pro"
+authors = [{ name = "XXXXRT" }]
+readme = "README.md"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+
+  "Topic :: Scientific/Engineering",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+
+  "Natural Language :: English",
+  "Natural Language :: Chinese (Simplified)",
+
+  "Operating System :: OS Independent",
+
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+
+requires-python = ">=3.10,<3.14"
+dependencies = [
+  "pre-commit",
+  "pip",
+  "ninja",
+  "cmake",
+  "cython",
+  "setuptools",
+  "wheel",
+  "build",
+]
+dynamic = ["optional-dependencies"]
+
+[project.urls]
+Homepage = "https://github.com/XXXXRT666/Docker-Base"
+Repository = "https://github.com/XXXXRT666/Docker-Base.git"
+
+[tool.hatch.metadata.hooks.requirements_txt.optional-dependencies]
+flash-attn = ["requirements/requirements.flash-attn.txt"]
+cu126 = ["requirements/requirements.torch.txt"]
+cu128 = ["requirements/requirements.torch.txt"]
+
+
+[tool.hatch.build.targets.wheel]
+  bypass-selection = true
+
+[tool.uv]
+upgrade = true
+no-build-isolation-package = ["flash-attn"]
+conflicts = [
+  [
+    { extra = "cu126" },
+    { extra = "cu128" },
+  ],
+]
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cu126", extra = "cu126" },
+  { index = "pytorch-cu128", extra = "cu128" },
+]
+flash-attn = [
+  { index = "XXXXRT" },
+]
+
+torchcodec = [
+  { index = "pytorch-cpu", extra = "cpu", marker = "sys_platform != 'linux' or platform_machine != 'aarch64'" },
+  { index = "pytorch-cu128", extra = "cpu", marker = "sys_platform == 'linux' and platform_machine == 'aarch64'" },
+  { index = "pytorch-cu126", extra = "cu126" },
+  { index = "pytorch-cu128", extra = "cu128" },
+] # We don't have 0.10.0 aarch64 cpu wheels for Linux, so we use the cu128 ones which are compatible with CPU
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "XXXXRT"
+url = "https://xxxxrt666.github.io/PIP-Index"
+explicit = true
