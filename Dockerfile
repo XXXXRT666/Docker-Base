@@ -46,8 +46,6 @@ WORKDIR /workspace
 
 COPY . /workspace
 
-RUN ls . && echo "1" && ls /workspace
-
 RUN bash miniforge_install.sh && rm -rf /workspace/*
 
 ENV PATH="$HOME/conda/bin:$PATH"
