@@ -59,15 +59,7 @@ source "$HOME/.bashrc"
 
 "$HOME/conda/bin/conda" install gcc=11 gxx ffmpeg uv cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -y
 
-echo "123456"
-
-ls .
-
-echo 111
-
-pwd
-
-ls pyproject.toml
+cd workspace
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
     "$HOME/conda/bin/uv" pip install ".[cu128]" --no-cache-dir --python "$HOME/conda/bin/python"
