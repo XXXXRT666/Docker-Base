@@ -71,7 +71,7 @@ fi
 
 export PATH="$HOME/conda/bin:$PATH"
 
-"$HOME/conda/bin/uv" pip install ".[flash-attn]" --python "$HOME/conda/bin/python"
+"$HOME/conda/bin/uv" pip install ".[flash-attn]" --python "$HOME/conda/bin/python" -v
 "$HOME/conda/bin/uv" cache clean
 
 rm $LOG_PATH
