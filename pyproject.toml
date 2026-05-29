@@ -59,8 +59,11 @@ flash-attn = [
 ]
 
 torchcodec = [
-  { index = "pytorch-cpu", extra = "cu126" },
-  { index = "pytorch-cpu", extra = "cu128" },
+  {index = "pytorch-cpu"}
+]
+
+torchaudio = [
+  {index = "pytorch-cpu"}
 ]
 
 [[tool.uv.index]]

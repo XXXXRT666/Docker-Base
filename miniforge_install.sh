@@ -57,7 +57,7 @@ source "$HOME/.bashrc"
 
 "$HOME/conda/bin/conda" install python=3.12 -y
 
-"$HOME/conda/bin/conda" install gcc=11 gxx ffmpeg uv cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -y
+"$HOME/conda/bin/conda" install gcc=14 gxx ffmpeg uv cmake make unzip $SYSROOT_PKG "libstdcxx-ng>=11" -y
 
 cd workspace
 
