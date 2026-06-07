@@ -34,7 +34,6 @@ cu128 = ["requirements/requirements.torch.txt"]
   bypass-selection = true
 
 [tool.uv]
-upgrade = true
 no-build-isolation-package = ["flash-attn"]
 conflicts = [
   [
@@ -44,6 +43,7 @@ conflicts = [
 ]
 
 [tool.uv.extra-build-dependencies]
+no-build-isolation-package = ["flash-attn"]
 flash-attn = [{ requirement = "torch", match-runtime = true }]
 
 [tool.uv.extra-build-variables]
