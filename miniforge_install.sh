@@ -64,7 +64,7 @@ cd workspace
 "$HOME/conda/bin/uv" pip install opencc pyopenjtalk --no-cache-dir --python "$HOME/conda/bin/python"
 
 if [ "$CUDA_VERSION" = "12.8" ]; then
-    "$HOME/conda/bin/uv" pip install ".[cu128]" -U --no-cache-dir --python "$HOME/conda/bin/python" -v
+    "$HOME/conda/bin/uv" pip install ".[cu128]" -U --no-cache-dir --python "$HOME/conda/bin/python"
 elif [ "$CUDA_VERSION" = "12.6" ]; then
     "$HOME/conda/bin/uv" pip install ".[cu126]" -U --no-cache-dir --python "$HOME/conda/bin/python"
 fi
