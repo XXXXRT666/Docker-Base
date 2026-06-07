@@ -1,4 +1,3 @@
 torch>2.6
-setuptools<82.0
 torchaudio 
 torchcodec
